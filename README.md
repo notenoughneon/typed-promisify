@@ -38,7 +38,7 @@ tp.map(elts, stat)
     .then(stats => console.log(stats));
 ```
 
-### _try()
+### _try(fn, arg1, arg2...)
 
 Call a synchronous function to kick off a promise chain.
 
