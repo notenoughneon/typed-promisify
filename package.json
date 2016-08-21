@@ -1,0 +1,30 @@
+{
+  "name": "typed-promisify",
+  "version": "0.1.0",
+  "description": "Typescript promisify, try, and map",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "typings install",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notenoughneon/typed-promisify.git"
+  },
+  "keywords": [
+    "typescript",
+    "promise",
+    "promisify"
+  ],
+  "author": "Emma Kuo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/notenoughneon/typed-promisify/issues"
+  },
+  "homepage": "https://github.com/notenoughneon/typed-promisify#readme",
+  "devDependencies": {
+    "typescript": "^1.8.10",
+    "typings": "^1.3.2"
+  }
+}
