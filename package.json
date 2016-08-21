@@ -1,7 +1,7 @@
 {
   "name": "typed-promisify",
   "version": "0.1.0",
-  "description": "Typescript promisify, try, and map",
+  "description": "Typescript promisify, map, and try",
   "main": "index.js",
   "scripts": {
     "prebuild": "typings install",
@@ -15,7 +15,8 @@
   "keywords": [
     "typescript",
     "promise",
-    "promisify"
+    "promisify",
+    "helper"
   ],
   "author": "Emma Kuo",
   "license": "MIT",
