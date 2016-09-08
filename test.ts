@@ -58,30 +58,26 @@ describe('map', function() {
     var f: (n) => Promise<number> = n => new Promise((res,rej) => res(n * n));
     var expected = [1, 4, 9];
 
-    it('array of values', function(done) {
-        map(elts, f)
-        .then(res => assert.deepEqual(res, expected))
-        .then(done);
+    it('array of values', function() {
+        return map(elts, f)
+        .then(res => assert.deepEqual(res, expected));
     });
 
-    it('array of promises', function(done) {
+    it('array of promises', function() {
         var eltps = elts.map(elt => new Promise((res, rej) => res(elt)));
-        map(eltps, f)
-        .then(res => assert.deepEqual(res, expected))
-        .then(done);
+        return map(eltps, f)
+        .then(res => assert.deepEqual(res, expected));
     });
 
-    it('promise of array of values', function(done) {
+    it('promise of array of values', function() {
         var pelts = new Promise((res,rej) => res(elts));
-        map(pelts, f)
-        .then(res => assert.deepEqual(res, expected))
-        .then(done);
+        return map(pelts, f)
+        .then(res => assert.deepEqual(res, expected));
     });
 
-    it('promise of array of promises', function(done) {
+    it('promise of array of promises', function() {
         var peltps = new Promise((res,rej) => res(elts.map(elt => new Promise((res, rej) => res(elt)))));
-        map(peltps, f)
-        .then(res => assert.deepEqual(res, expected))
-        .then(done);
+        return map(peltps, f)
+        .then(res => assert.deepEqual(res, expected));
     });
 });
