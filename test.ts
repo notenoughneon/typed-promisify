@@ -1,6 +1,57 @@
 import * as assert from 'assert';
-import {map} from './index';
+import {promisify, map} from './index';
 
+describe('promisify', function() {
+    function f(cb) {
+        cb(null, 'f');
+    }
+
+    function fe(cb) {
+        cb('error', null);
+    }
+
+    function fa(a, cb) {
+        cb(null, 'f' + a);
+    }
+
+    function fae(a, cb) {
+        cb('error', null);
+    }
+
+    it('function with no args', function() {
+        return promisify(f)()
+        .then(res => {
+            assert.equal(res, 'f');
+        });
+    });
+
+    it('function with no args throws exception', function() {
+        return promisify(fe)()
+        .then(res => {
+            throw new Error('expected an exception');
+        })
+        .catch(err => {
+            assert.equal(err, 'error');
+        });
+    });
+
+    it('function with one arg', function() {
+        return promisify(fa)('a')
+        .then(res => {
+            assert.equal(res, 'fa');
+        });
+    });
+
+    it('function with one arg throws exception', function() {
+        return promisify(fae)('a')
+        .then(res => {
+            throw new Error('expected an exception');
+        })
+        .catch(err => {
+            assert.equal(err, 'error');
+        });
+    });
+});
 
 describe('map', function() {
     var elts = [1, 2, 3];
