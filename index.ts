@@ -4,7 +4,7 @@ export function promisify<A, A2, T>(f: (arg: A, arg2: A2, cb: (err: any, res: T)
 export function promisify<A, A2, A3, T>(f: (arg: A, arg2: A2, arg3: A3, cb: (err: any, res: T) => void) => void, thisContext?: any): (arg: A, arg2: A2, arg3: A3) => Promise<T>;
 export function promisify<A, A2, A3, A4, T>(f: (arg: A, arg2: A2, arg3: A3, arg4: A4, cb: (err: any, res: T) => void) => void, thisContext?: any): (arg: A, arg2: A2, arg3: A3, arg4: A4) => Promise<T>;
 
-export function promisify(f: () => void, thisContext: any = null) {
+export function promisify(f, thisContext?) {
     return function () {
         let args = Array.prototype.slice.call(arguments);
         return new Promise((resolve, reject) => {
@@ -30,7 +30,7 @@ export function _try<T>(f: (arg: any, arg2: any) => T, arg: any, arg2: any): Pro
 export function _try<T>(f: (arg: any, arg2: any, arg3: any) => T, arg: any, arg2: any, arg3: any): Promise<T>;
 export function _try<T>(f: (arg: any, arg2: any, arg3: any, arg4: any) => T, arg: any, arg2: any, arg3: any, arg4: any): Promise<T>;
 
-export function _try(f: any, thisContext: any = null) {
+export function _try(f, thisContext?) {
     let args = Array.prototype.slice.call(arguments);
     return new Promise((res, rej) => {
         try {
