@@ -18,6 +18,13 @@ describe('promisify', function() {
         cb('error', null);
     }
 
+    let o = {
+        v: 'value',
+        f(cb) {
+            cb(null, this.v);
+        }
+    };
+
     it('function with no args', function() {
         return promisify(f)()
         .then(res => {
@@ -50,6 +57,13 @@ describe('promisify', function() {
         .catch(err => {
             assert.equal(err, 'error');
         });
+    });
+
+    it('function with this', function () {
+        return promisify(o.f, o)()
+            .then(res => {
+                assert.equal(res, 'value');
+            });
     });
 });
 
