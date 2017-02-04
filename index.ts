@@ -4,23 +4,23 @@ export function promisify<A, A2, T>(f: (arg: A, arg2: A2, cb: (err: any, res: T)
 export function promisify<A, A2, A3, T>(f: (arg: A, arg2: A2, arg3: A3, cb: (err: any, res: T) => void) => void, thisContext?: any): (arg: A, arg2: A2, arg3: A3) => Promise<T>;
 export function promisify<A, A2, A3, A4, T>(f: (arg: A, arg2: A2, arg3: A3, arg4: A4, cb: (err: any, res: T) => void) => void, thisContext?: any): (arg: A, arg2: A2, arg3: A3, arg4: A4) => Promise<T>;
 
-export function promisify(f, thisContext?) {
+export function promisify(f: any, thisContext?: any) {
     return function () {
         let args = Array.prototype.slice.call(arguments);
         return new Promise((resolve, reject) => {
-            args.push((err, result) => err !== null ? reject(err) : resolve(result));
+            args.push((err: any, result: any) => err !== null ? reject(err) : resolve(result));
             f.apply(thisContext, args);
         });
     }
 }
 
-export function map<T, U>(elts: PromiseLike<PromiseLike<T>[]>, f: (T) => U | PromiseLike<U>): Promise<U[]>;
-export function map<T, U>(elts: PromiseLike<T[]>, f: (T) => U | PromiseLike<U>): Promise<U[]>;
-export function map<T, U>(elts: PromiseLike<T>[], f: (T) => U | PromiseLike<U>): Promise<U[]>;
-export function map<T, U>(elts: T[], f: (T) => U | PromiseLike<U>): Promise<U[]>;
+export function map<T, U>(elts: PromiseLike<PromiseLike<T>[]>, f: (t: T) => U | PromiseLike<U>): Promise<U[]>;
+export function map<T, U>(elts: PromiseLike<T[]>, f: (t: T) => U | PromiseLike<U>): Promise<U[]>;
+export function map<T, U>(elts: PromiseLike<T>[], f: (t: T) => U | PromiseLike<U>): Promise<U[]>;
+export function map<T, U>(elts: T[], f: (t: T) => U | PromiseLike<U>): Promise<U[]>;
 
-export function map(elts, f) {
-    let apply = elts => Promise.all(elts.map(elt => typeof elt.then === 'function' ? elt.then(f) : f(elt)));
+export function map(elts: any, f: any) {
+    let apply = (appElts: any) => Promise.all(appElts.map((elt: any) => typeof elt.then === 'function' ? elt.then(f) : f(elt)));
     return typeof elts.then === 'function' ? elts.then(apply) : apply(elts);
 }
 
@@ -30,7 +30,7 @@ export function _try<T>(f: (arg: any, arg2: any) => T, arg: any, arg2: any): Pro
 export function _try<T>(f: (arg: any, arg2: any, arg3: any) => T, arg: any, arg2: any, arg3: any): Promise<T>;
 export function _try<T>(f: (arg: any, arg2: any, arg3: any, arg4: any) => T, arg: any, arg2: any, arg3: any, arg4: any): Promise<T>;
 
-export function _try(f, thisContext?) {
+export function _try(f: any, thisContext?: any) {
     let args = Array.prototype.slice.call(arguments);
     return new Promise((res, rej) => {
         try {

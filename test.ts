@@ -1,26 +1,28 @@
 import * as assert from 'assert';
 import {promisify, map} from './index';
 
+type Callback = (err: any, res: any) => void;
+
 describe('promisify', function() {
-    function f(cb) {
+    function f(cb: Callback) {
         cb(null, 'f');
     }
 
-    function fe(cb) {
+    function fe(cb: Callback) {
         cb('error', null);
     }
 
-    function fa(a, cb) {
+    function fa(a: string, cb: Callback) {
         cb(null, 'f' + a);
     }
 
-    function fae(a, cb) {
+    function fae(a: string, cb: Callback) {
         cb('error', null);
     }
 
     let o = {
         v: 'value',
-        f(cb) {
+        f(cb: Callback) {
             cb(null, this.v);
         }
     };
@@ -69,7 +71,7 @@ describe('promisify', function() {
 
 describe('map', function() {
     var elts = [1, 2, 3];
-    var f: (n) => Promise<number> = n => new Promise((res,rej) => res(n * n));
+    var f: (n: number) => Promise<number> = n => new Promise((res,rej) => res(n * n));
     var expected = [1, 4, 9];
 
     it('array of values', function() {
