@@ -1,13 +1,13 @@
 {
     "compilerOptions": {
-        "target": "es6",
+        "target": "es5",        
         "module": "commonjs",
+        "lib": ["es2015"],
         "sourceMap": true,
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "declaration": true,
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true
     },
-    "exclude": [
-        "node_modules",
-        "typings/browser",
-        "typings/browser.d.ts"
-    ]
+    "files": ["index.ts"]
 }
