@@ -8,7 +8,7 @@ describe('promisify', function() {
         cb(null, 'f');
     }
 
-    function fe(cb: Callback) {
+    function fe(cb?: Callback) {
         cb('error', null);
     }
 
@@ -16,7 +16,7 @@ describe('promisify', function() {
         cb(null, 'f' + a);
     }
 
-    function fae(a: string, cb: Callback) {
+    function fae(a: string, cb?: Callback) {
         cb('error', null);
     }
 
