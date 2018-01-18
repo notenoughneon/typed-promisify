@@ -8,6 +8,10 @@ describe('promisify', function() {
         cb(null, 'f');
     }
 
+    function fundefined(cb: Callback) {
+        cb(undefined, 'f');
+    }
+
     function fe(cb: Callback) {
         cb('error', null);
     }
@@ -29,6 +33,13 @@ describe('promisify', function() {
 
     it('function with no args', function() {
         return promisify(f)()
+        .then(res => {
+            assert.equal(res, 'f');
+        });
+    });
+
+    it('function with undefined', function() {
+        return promisify(fundefined)()
         .then(res => {
             assert.equal(res, 'f');
         });
