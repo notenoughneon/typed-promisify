@@ -2,12 +2,14 @@
     "compilerOptions": {
         "target": "es6",
         "module": "commonjs",
+        "outDir": "dist",
         "sourceMap": true,
+        "declaration": true,
         "noImplicitAny": true
     },
     "exclude": [
         "node_modules",
-        "typings/browser",
-        "typings/browser.d.ts"
+        "dist",
+        "**/*.spec.ts"
     ]
 }

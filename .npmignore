@@ -1,0 +1,4 @@
+!dist
+src
+mocha.opts
+tsconfig.json
