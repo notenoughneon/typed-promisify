@@ -71,7 +71,7 @@ describe('promisify', function() {
 
 describe('map', function() {
     var elts = [1, 2, 3];
-    var f: (n: number) => Promise<number> = n => new Promise((res,rej) => res(n * n));
+    var f: (n: number) => Promise<number> = n => Promise.resolve(n * n);
     var expected = [1, 4, 9];
 
     it('array of values', function() {
@@ -80,19 +80,19 @@ describe('map', function() {
     });
 
     it('array of promises', function() {
-        var eltps = elts.map(elt => new Promise((res, rej) => res(elt)));
+        var eltps = elts.map(elt => Promise.resolve(elt));
         return map(eltps, f)
         .then(res => assert.deepEqual(res, expected));
     });
 
     it('promise of array of values', function() {
-        var pelts = new Promise((res,rej) => res(elts));
+        var pelts = Promise.resolve(elts);
         return map(pelts, f)
         .then(res => assert.deepEqual(res, expected));
     });
 
     it('promise of array of promises', function() {
-        var peltps = new Promise((res,rej) => res(elts.map(elt => new Promise((res, rej) => res(elt)))));
+        var peltps = Promise.resolve(elts.map(elt => Promise.resolve(elt)));
         return map(peltps, f)
         .then(res => assert.deepEqual(res, expected));
     });
